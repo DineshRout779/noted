@@ -25,8 +25,7 @@ function App() {
       text: text,
       date: createdAt.toLocaleDateString(),
     };
-    const newNotes = [...notes, newNote];
-    setNotes(newNotes);
+    setNotes([...notes, newNote]);
   };
 
   const deleteNote = (id) => {
