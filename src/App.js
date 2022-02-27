@@ -3,12 +3,14 @@ import Header from './components/Header';
 import NotesList from './components/NotesList';
 import { nanoid } from 'nanoid';
 import SearchBar from './components/SearchBar';
+import Welcome from './components/Welcome';
 
 function App() {
   const [notes, setNotes] = useState(
     JSON.parse(localStorage.getItem('notes')) || []
   );
   const [value, setValue] = useState('');
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const handleChange = (e) => {
     setValue(e.target.value);
@@ -32,18 +34,30 @@ function App() {
     localStorage.setItem('notes', JSON.stringify(notes));
   }, [notes]);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoaded(true);
+    }, 2000);
+  }, []);
+
   return (
-    <div className='app'>
-      <Header />
-      <SearchBar value={value} handleChange={handleChange} />
-      <NotesList
-        notes={notes.filter((note) =>
-          note.text.toLowerCase().includes(value.toLowerCase())
-        )}
-        handleAddNote={addNote}
-        handleDeleteNote={deleteNote}
-      />
-    </div>
+    <>
+      {isLoaded ? (
+        <div className='app'>
+          <Header />
+          <SearchBar value={value} handleChange={handleChange} />
+          <NotesList
+            notes={notes.filter((note) =>
+              note.text.toLowerCase().includes(value.toLowerCase())
+            )}
+            handleAddNote={addNote}
+            handleDeleteNote={deleteNote}
+          />
+        </div>
+      ) : (
+        <Welcome />
+      )}
+    </>
   );
 }
 
