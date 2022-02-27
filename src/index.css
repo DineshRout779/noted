@@ -1,7 +1,18 @@
 :root {
-  --primary-yellow: #f6cd6b;
+  --bg: #fcfcfc;
+  --text-color: #333;
+  --primary-yellow: #f6c248;
   --primary-cyan: #60e9c4;
   --primary-blue: #073b4c;
+  --icon-color: #333;
+  --shadow-color: #dfd8d8;
+}
+
+html[data-theme='dark'] {
+  --bg: #333;
+  --text-color: #fcfcfc;
+  --icon-color: #fcfcfc;
+  --shadow-color: #4e4949;
 }
 
 * {
@@ -13,6 +24,8 @@
 
 body {
   line-height: 1.6;
+  background-color: var(--bg);
+  color: var(--text-color);
 }
 
 .container {
@@ -22,13 +35,45 @@ body {
 }
 
 header {
+  position: sticky;
+  top: 0;
   padding: 0.6em 0;
-  background-color: rgb(250, 246, 246);
-  /* box-shadow: 0 0 10px 0 #ccc; */
+  background-color: var(--bg);
+  box-shadow: 0 0 20px 0 var(--shadow-color);
+}
+
+.flex {
+  display: flex;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.align-center {
+  align-items: center;
 }
 
 header h1 {
   font-weight: 400;
+}
+
+.search {
+  display: flex;
+  margin: 1em 0;
+  padding: 0.5em;
+  border: 1px solid var(--text-color);
+  border-radius: 6px;
+}
+
+input {
+  margin-left: 0.5em;
+  width: 100%;
+  border: none;
+  background-color: transparent;
+  outline: none;
+  color: var(--text-color);
+  font-size: 1em;
 }
 
 .note {
@@ -70,13 +115,27 @@ textarea {
   font-size: 1em;
 }
 
+.icon {
+  font-size: 1.5em;
+}
+
 .delete-icon {
   cursor: pointer;
 }
 
+.theme-icon {
+  color: var(--icon-color);
+  font-size: 1.5em;
+}
+
 .delete-icon:hover {
-  color: red;
+  color: rgb(245, 32, 32);
   transform: scale(1.2);
+}
+
+button {
+  background-color: transparent;
+  border: none;
 }
 
 .btn {
