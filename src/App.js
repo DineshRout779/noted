@@ -1,22 +1,19 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Header from './components/Header';
 import NotesList from './components/NotesList';
 import { nanoid } from 'nanoid';
 import SearchBar from './components/SearchBar';
 
 function App() {
-  const [notes, setNotes] = useState([
-    {
-      id: 'xJdzTpY9UKYbRhO00qN-P',
-      text: 'This is my first note',
-      date: '05/05/2021',
-    },
-    {
-      id: 'uvv7ISkM-C7VH-Og082eg',
-      text: 'This is my second note',
-      date: '15/07/2021',
-    },
-  ]);
+  const [notes, setNotes] = useState(
+    JSON.parse(localStorage.getItem('notes')) || [
+      {
+        id: 1,
+        text: 'Please create a note',
+        date: new Date(),
+      },
+    ]
+  );
   const [value, setValue] = useState('');
 
   const handleChange = (e) => {
@@ -24,11 +21,10 @@ function App() {
   };
 
   const addNote = (text) => {
-    const createdAt = new Date();
     const newNote = {
       id: nanoid(),
       text: text,
-      date: createdAt.toLocaleDateString(),
+      date: new Date(),
     };
     setNotes([...notes, newNote]);
   };
@@ -37,6 +33,10 @@ function App() {
     const updatedNotes = notes.filter((note) => note.id !== id);
     setNotes(updatedNotes);
   };
+
+  useEffect(() => {
+    localStorage.setItem('notes', JSON.stringify(notes));
+  }, [notes]);
 
   return (
     <div className='app'>
