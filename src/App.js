@@ -1,21 +1,26 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Header from './components/Header';
 import NotesList from './components/NotesList';
 import { nanoid } from 'nanoid';
+import SearchBar from './components/SearchBar';
 
 function App() {
-  const [notes, setNotes] = useState([]);
+  const [notes, setNotes] = useState([
+    {
+      id: 'xJdzTpY9UKYbRhO00qN-P',
+      text: 'This is my first note',
+      date: '05/05/2021',
+    },
+    {
+      id: 'uvv7ISkM-C7VH-Og082eg',
+      text: 'This is my second note',
+      date: '15/07/2021',
+    },
+  ]);
+  const [value, setValue] = useState('');
 
-  useEffect(() => {
-    getNotes();
-  }, []);
-
-  const getNotes = () => {
-    const url = './data.json';
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => setNotes(data.notes))
-      .catch((err) => console.log(err));
+  const handleChange = (e) => {
+    setValue(e.target.value);
   };
 
   const addNote = (text) => {
@@ -36,8 +41,11 @@ function App() {
   return (
     <div className='app'>
       <Header />
+      <SearchBar value={value} handleChange={handleChange} />
       <NotesList
-        notes={notes}
+        notes={notes.filter((note) =>
+          note.text.toLowerCase().includes(value.toLowerCase())
+        )}
         handleAddNote={addNote}
         handleDeleteNote={deleteNote}
       />
