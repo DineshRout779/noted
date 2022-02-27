@@ -5,7 +5,7 @@ const Note = ({ id, text, date, handleDeleteNote }) => {
     <div className='note' id={id.toString()}>
       <p>{text.replace(/  +/g, ' ')}</p>
       <div className='note-footer'>
-        <small>{date.toDateString()}</small>
+        <small>{date}</small>
         <MdDeleteForever
           className='delete-icon'
           size='1.5em'

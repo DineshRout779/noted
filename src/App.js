@@ -6,13 +6,7 @@ import SearchBar from './components/SearchBar';
 
 function App() {
   const [notes, setNotes] = useState(
-    JSON.parse(localStorage.getItem('notes')) || [
-      {
-        id: 1,
-        text: 'Please create a note',
-        date: new Date(),
-      },
-    ]
+    JSON.parse(localStorage.getItem('notes')) || []
   );
   const [value, setValue] = useState('');
 
@@ -24,7 +18,7 @@ function App() {
     const newNote = {
       id: nanoid(),
       text: text,
-      date: new Date(),
+      date: new Date().toDateString(),
     };
     setNotes([...notes, newNote]);
   };
