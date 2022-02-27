@@ -1,7 +1,7 @@
 :root {
   --bg: #fcfcfc;
   --text-color: #333;
-  --primary-yellow: #f6c248;
+  --primary-yellow: #e2ac2e;
   --primary-cyan: #60e9c4;
   --primary-blue: #073b4c;
   --icon-color: #333;
@@ -10,11 +10,11 @@
 }
 
 html[data-theme='dark'] {
-  --bg: #333;
+  --bg: rgb(26, 24, 24);
   --text-color: #fcfcfc;
   --icon-color: #fcfcfc;
-  --shadow-color: #4e4949;
-  --border: #f0e6e6;
+  --shadow-color: #222121;
+  --border: #685d5d;
 }
 
 * {
